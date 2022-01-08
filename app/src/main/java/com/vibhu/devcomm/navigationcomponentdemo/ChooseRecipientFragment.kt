@@ -3,6 +3,7 @@ package com.vibhu.devcomm.navigationcomponentdemo
 
 import android.os.Bundle
 import android.text.TextUtils
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -20,7 +21,7 @@ import com.google.android.material.textfield.TextInputEditText
 class ChooseRecipientFragment : Fragment(), View.OnClickListener {
 
     lateinit var navController: NavController
-
+    lateinit var input_recipient:TextInputEditText
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -35,12 +36,15 @@ class ChooseRecipientFragment : Fragment(), View.OnClickListener {
         navController = Navigation.findNavController(view)
         view.findViewById<Button>(R.id.next_btn).setOnClickListener(this)
         view.findViewById<Button>(R.id.cancel_btn).setOnClickListener(this)
+        input_recipient = view.findViewById<TextInputEditText>(R.id.input_recipient)
+        input_recipient.setOnClickListener(this)
     }
 
     override fun onClick(v: View?) {
-        val input_recipient = v!!.findViewById<TextInputEditText>(R.id.input_recipient)
-        when(v.id){
+        Log.d("#### ChooseRecipientFragment","View got clicked")
+        when(v!!.id){
             R.id.next_btn -> {
+                Log.d("#### ChooseRecipientFragment","TextInputEditText ke andar aa gaye")
                 if(!TextUtils.isEmpty(input_recipient.text.toString())){
                     val bundle = bundleOf("recipient" to input_recipient.text.toString())
                     navController.navigate(
@@ -52,7 +56,6 @@ class ChooseRecipientFragment : Fragment(), View.OnClickListener {
                     Toast.makeText(activity, "Enter a name", Toast.LENGTH_SHORT).show()
                 }
             }
-
             R.id.cancel_btn -> requireActivity().onBackPressed()
         }
     }

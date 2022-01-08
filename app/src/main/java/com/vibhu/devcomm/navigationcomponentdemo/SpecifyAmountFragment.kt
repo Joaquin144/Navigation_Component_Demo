@@ -23,12 +23,12 @@ class SpecifyAmountFragment : Fragment(), View.OnClickListener {
 
     lateinit var navController: NavController
     lateinit var recipient: String
+    lateinit var input_amount:TextInputEditText
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        recipient = arguments!!.getString("recipient")
-
-
+        //recipient = arguments!!.getString("recipient")
+        recipient = requireArguments().getString("recipient")!!
     }
 
     override fun onCreateView(
@@ -45,14 +45,13 @@ class SpecifyAmountFragment : Fragment(), View.OnClickListener {
         view.findViewById<Button>(R.id.cancel_btn).setOnClickListener(this)
         val message = "Sending money to $recipient"
         view.findViewById<TextView>(R.id.recipient).text = message
+        input_amount = view.findViewById(R.id.input_amount)
     }
 
     override fun onClick(v: View?) {
-        val input_amount:TextInputEditText = v!!.findViewById(R.id.input_amount)
-        when(v.id){
+        when(v!!.id){
             R.id.send_btn -> {
                 if(!TextUtils.isEmpty(input_amount.text.toString())){
-
                     val amount = Money(BigDecimal(input_amount.text.toString()))
                     val bundle = bundleOf(
                         "recipient" to recipient,

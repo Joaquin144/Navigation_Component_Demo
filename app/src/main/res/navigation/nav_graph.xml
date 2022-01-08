@@ -13,13 +13,27 @@
         tools:layout="@layout/fragment_main" >
         <action
             android:id="@+id/action_mainFragment_to_viewTransactionFragment"
-            app:destination="@id/viewTransactionFragment" />
+            app:destination="@id/viewTransactionFragment"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"/>
         <action
             android:id="@+id/action_mainFragment_to_chooseRecipientFragment2"
-            app:destination="@id/chooseRecipientFragment" />
+            app:destination="@id/chooseRecipientFragment"
+            app:popUpTo="@id/mainFragment"
+            app:popUpToInclusive="true"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"/>
         <action
             android:id="@+id/action_mainFragment_to_viewBalanceFragment2"
-            app:destination="@id/viewBalanceFragment" />
+            app:destination="@id/viewBalanceFragment"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"/>
     </fragment>
     <fragment
         android:id="@+id/chooseRecipientFragment"
@@ -34,12 +48,22 @@
         android:id="@+id/confirmationFragment"
         android:name="com.vibhu.devcomm.navigationcomponentdemo.ConfirmationFragment"
         android:label="fragment_confirmation"
-        tools:layout="@layout/fragment_confirmation" />
+        tools:layout="@layout/fragment_confirmation" >
+        <argument
+            android:name="recipient"
+            android:defaultValue="None"/>
+        <argument
+            android:name="amount"
+            app:argType="com.vibhu.devcomm.navigationcomponentdemo.Money"/>
+    </fragment>
     <fragment
         android:id="@+id/specifyAmountFragment"
         android:name="com.vibhu.devcomm.navigationcomponentdemo.SpecifyAmountFragment"
         android:label="fragment_specify_amount"
         tools:layout="@layout/fragment_specify_amount" >
+        <argument
+            android:name="recipient"
+            android:defaultValue="None"/>
         <action
             android:id="@+id/action_specifyAmountFragment_to_confirmationFragment"
             app:destination="@id/confirmationFragment" />
