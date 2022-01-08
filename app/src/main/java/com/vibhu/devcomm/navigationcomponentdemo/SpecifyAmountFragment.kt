@@ -13,8 +13,9 @@ import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
-import kotlinx.android.synthetic.main.fragment_choose_recipient.*
-import kotlinx.android.synthetic.main.fragment_specify_amount.*
+import com.google.android.material.textfield.TextInputEditText
+//import kotlinx.android.synthetic.main.fragment_choose_recipient.*
+//import kotlinx.android.synthetic.main.fragment_specify_amount.*
 import java.math.BigDecimal
 
 
@@ -47,7 +48,8 @@ class SpecifyAmountFragment : Fragment(), View.OnClickListener {
     }
 
     override fun onClick(v: View?) {
-        when(v!!.id){
+        val input_amount:TextInputEditText = v!!.findViewById(R.id.input_amount)
+        when(v.id){
             R.id.send_btn -> {
                 if(!TextUtils.isEmpty(input_amount.text.toString())){
 
@@ -56,7 +58,7 @@ class SpecifyAmountFragment : Fragment(), View.OnClickListener {
                         "recipient" to recipient,
                         "amount" to amount
                     )
-                    navController!!.navigate(
+                    navController.navigate(
                         R.id.action_specifyAmountFragment_to_confirmationFragment,
                         bundle
                     )
@@ -66,7 +68,7 @@ class SpecifyAmountFragment : Fragment(), View.OnClickListener {
                 }
             }
 
-            R.id.cancel_btn -> activity!!.onBackPressed()
+            R.id.cancel_btn -> requireActivity().onBackPressed()
         }
     }
 }
